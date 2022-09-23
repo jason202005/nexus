@@ -1,4 +1,90 @@
-body {
-  color: black;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import "./_mixins.scss";
+
+$bg-color: white;
+
+:root {
+  --main-color: #3664e8;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: $bg-color;
+}
+
+.content {
+  position: relative;
+  width: 100vw;
+  height: calc(1vh*100);
+  overflow: hidden;
+  content-visibility: auto;
+  transition:  all 0.5s cubic-bezier(0.075, 0.82, 0.165,1);
+}
+
+.grid-elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 2110px;
+  height: 1600px;
+  top: calc(((1vh * 100) - 1600px) / 2 );
+  left: calc((100vw - 2110px) / 2);
+  content-visibility: auto;
+}
+
+.grid-elements {
+  display: grid;
+  grid-template-columns: repeat(5, 420px);
+
+  .element {
+    padding: 32px 46px;
+    width: 420px;
+    height: 400px;
+  }
+
+  .thumbnail-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+}
+
+.list-elements {
+  overflow: auto hidden;
+  height: calc(1vh * 100);
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  align-items: center;
+  padding: 0px 10vmin;
+
+  .element {
+    width: 70vmin;
+    height: 70vmin;
+    margin: 0px 5vw;
+  }
+}
+
+.custom-button {
+  padding: 0;
+  background-color: white;
+  box-shadow: none;
+  border: none;
+
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+      background-color: black;
+
+      svg {
+          color: white;
+      }
+  }
+  svg {
+      stroke-width: 1px;
+  }
+
+}

@@ -14,17 +14,20 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "feather-icons": "^4.29.0",
+    "framer-motion": "^6.2.4",
     "gatsby": "^4.10.3",
     "gatsby-plugin-less": "^6.10.0",
     "gatsby-plugin-sass": "^5.10.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
-    "node-sass": "^7.0.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-feather": "^2.0.10"
   },
   "devDependencies": {
-    "prettier": "^2.6.0"
+    "prettier": "^2.6.0",
+    "sass": "^1.54.9"
   },
   "repository": {
     "type": "git",
