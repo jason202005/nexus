@@ -1,11 +1,11 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState,useEffect, MouseEvent } from "react";
 import ImageLink from "../components/ImageLink";
 import Header from "../components/Header";
 import jsonData from "../data.json";
 import { animations, useAnimation } from "framer-motion";
 import Loader from "../components/Loader";
 import {defaultTransition} from '../utils/transition';
-import { animate, AnimationControls, motion, Variants, useMotionValue } from 'framer-motion'
+import { animate, AnimationControls, motion, Variants, useMotionValue, useSpring } from 'framer-motion'
 export type DataType = {
     cover: string;
     title: string;
@@ -21,9 +21,11 @@ export default function Home(){
     const mapData: DataType[] = Array.from(jsonData);
     const loaderControls = useAnimation();
     const animation = useAnimation();
+    const gridRef = useRef<HTMLDivElement | null>(null);
 
     const bgColor = useMotionValue("black");
-
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
     useEffect(() => {
         async function sequence() {
             await animation.set((index) => (
@@ -57,6 +59,22 @@ export default function Home(){
         }, 2000);
        
     }, [] )
+    const handleGridParallax = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (gridRef.current) {
+            const speed = 10;
+            const {width, height} = gridRef.current.getBoundingClientRect();
+            const offsetX = event.pageX - width *0.5;
+            const offsetY = event.pageY - height *0.5;
+            const newTransformX = (offsetX * speed)  /100;
+            const newTransformY = (offsetY * speed)  /100;
+            x.set(newTransformX);
+            y.set(newTransformY);
+        }
+
+    };
+
+    const xMotion = useSpring(x, {stiffness: 400, damping:90});
+    const yMotion = useSpring(y, {stiffness: 400, damping:90})
 
     return <>
     <Loader title={"Cities"} loaderControls={loaderControls}/>
@@ -70,7 +88,17 @@ export default function Home(){
             >
             {gridVisible && (
                 <div className="grid-container">
-                    <div className="grid-elements">
+                    <motion.div 
+                        className="grid-elements"
+                        onMouseMove={handleGridParallax}
+                        ref={gridRef}
+                       
+                        transition={defaultTransition}
+                        style={{
+                            x: xMotion,
+                            y: yMotion,
+                        }}
+                        >
                         {
                             mapData.map((element, index)=> (
                                 <motion.div 
@@ -85,11 +113,13 @@ export default function Home(){
                                 </motion.div>
                             ))
                         }
-                    </div>
+                    </motion.div>
                 </div>
             )}
             {!gridVisible && (
-            <div className="list-elements">
+            <motion.div 
+            className="list-elements"
+                >
                 {
                     mapData.map((element, index)=> (
                         <div className="element">
@@ -99,7 +129,7 @@ export default function Home(){
                         </div>
                     ))
                 }
-            </div>
+            </motion.div>
                 
             )}
          </motion.div>
