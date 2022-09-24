@@ -28,15 +28,18 @@ body {
   align-items: center;
   position: absolute;
   width: 2110px;
+  // width: 2500px;
   height: 1600px;
-  top: calc(((1vh * 100) - 1600px) / 2 );
+  top: calc(((1vh * 100) - 1600px) / 2 ); 
   left: calc((100vw - 2110px) / 2);
+  // left: calc((100vw - 2500px) / 2);
   content-visibility: auto;
 }
 
 .grid-elements {
   display: grid;
-  grid-template-columns: repeat(5, 420px);
+  // grid-template-columns: repeat(5, 420px);
+  grid-template-columns: repeat(5, 500px);
 
   .element {
     padding: 32px 46px;
