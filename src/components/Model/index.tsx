@@ -23,9 +23,9 @@ const variants: Variants = {
 
 export type SubDataType = {
     type: string;
-    imagelinks: string[];
-    buttoncontent: string[];
-    buttonnumber: string[];
+    imagelinks: string;
+    buttoncontent: string;
+    buttonnumber: number;
 }
 
 
@@ -52,8 +52,6 @@ export default function Model ({pageContext}: Props) {
         data: [],
       });
     
-      
-    
 
     const mapData: SubDataType[] = Array.from(jsonData);
     const filtertypes = (event: React.MouseEvent<HTMLElement>) => {
@@ -67,14 +65,12 @@ export default function Model ({pageContext}: Props) {
             });
         setbuttontype({type: value, data:newArray});
       };
-   
-
-   
     
-
     const buttonlist = pageContext.subtype.map((type,key) => <button onClick={filtertypes} value={type}> {type}</button>);
     
-    
+    useEffect(() => {
+        setbuttontype({type: "all", data:mapData});
+    }, []);
 
 
     return (
@@ -94,14 +90,28 @@ export default function Model ({pageContext}: Props) {
                 animate={"animate"}
                 transition={{defaultTransition, delay:2}}
             />
-
+            {
+                buttontype.data.map((element, index)=> (
+                    <motion.div 
+                        key={index}
+                        className={`element-${index}`}
+                        variants = {variants}
+                        initial={"initial"}
+                        animate={"animate"}
+                        >
+                        <div className={`thumbnail-wrapper-${element.buttonnumber}`}>
+                            {/* <ImageLink element={element} index={index} /> */}
+                            <motion.img 
+                            className={`grid-link-item-${element.buttonnumber}`} 
+                            src={element.imagelinks} 
+                            // layoutId={`container-${index}`}
+                            transition={defaultTransition}
+                            />
+                        </div>
+                    </motion.div>
+                ))
+            }
             
-            {/* <div className="page-content">
-                {pageContext.content}
-            </div> */}
-            {/* <div className="page-content"> */}
-           
-            {/* </div> */}
             
         </div>
 
