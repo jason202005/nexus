@@ -2,17 +2,36 @@
     margin: 2%;
 }
 
-.image-wrapper {
-    height: 100vh;
-    width: 100vw;
+.button-list{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.image-wrapper {
+    // height: 100vh;
+    // width: 100vw;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     img {
     width: 1200px;
     aspect-ratio: 16/9;
     object-fit: cover;
+    padding: 10px;
     }
+    // .page-content{
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
+    
+    overflow: auto hidden;
+    height: 92vh;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    align-items: center;
+    
 }
 
 .home-button {
@@ -21,3 +40,4 @@
     right: 1.6rem;
     width: 80px;
 }
+

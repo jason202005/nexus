@@ -11,6 +11,8 @@ export type DataType = {
     title: string;
     color: string;
     slug: string;
+    content: string;
+    subtype: string[];
 }
 
 
