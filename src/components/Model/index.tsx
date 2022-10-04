@@ -6,6 +6,7 @@ import { defaultTransition } from "../../utils/transition";
 import HomeButton from "./HomeButton";
 import Loader from "../Loader";
 import jsonData from "../../assets/subtypes.json";
+import SubModel from "./SubModel";
 type Props = {
     pageContext : DataType;
 }
@@ -33,7 +34,6 @@ export type SubDataType = {
 export default function Model ({pageContext}: Props) {
         
     const control = useAnimation();
-
     useEffect(() => {
         setTimeout(()=> {
             control.start({
@@ -94,6 +94,7 @@ export default function Model ({pageContext}: Props) {
             {buttonlist}
         </div>
         {console.log(buttontype.data)}
+
         <div className="image-wrapper">
             <motion.img 
                 src={pageContext.cover}
@@ -102,7 +103,17 @@ export default function Model ({pageContext}: Props) {
                 animate={"animate"}
                 transition={{defaultTransition, delay:2}}
             />
-            {
+        
+        
+            { 
+                buttontype.data.map((element) => (
+                    <SubModel Btndata={element}/>
+                    ) 
+                )                
+            }
+
+
+            {/* {
                 buttontype.data.map((element, index)=> (
                     <motion.div 
                         key={`buttontype.type-${index}`}
@@ -112,7 +123,7 @@ export default function Model ({pageContext}: Props) {
                         animate={"animate"}
                         >
                         <div className={`thumbnail-wrapper-${element.buttonnumber}`}>
-                            {/* <ImageLink element={element} index={index} /> */}
+                         
                             <motion.img 
                             className={`grid-link-item-${element.buttonnumber}`} 
                             src={element.imagelinks} 
@@ -122,11 +133,10 @@ export default function Model ({pageContext}: Props) {
                         </div>
                     </motion.div>
                 ))
-            }
+            } */}
             
             
-        </div>
-
+        </div> 
         
        
         
