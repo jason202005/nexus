@@ -26,7 +26,7 @@ return (
     // {
         // Btndata.data.map((element, index)=> (
             <motion.div 
-                // key={`Btndata.type-${index}`}
+                key={Btndata.buttonnumber}
                 // className={`element-${index}`}
                 variants = {variants}
                 initial={"initial"}
