@@ -67,9 +67,21 @@ export default function Model ({pageContext}: Props) {
       };
     
     const buttonlist = pageContext.subtype.map((type,key) => <button onClick={filtertypes} value={type}> {type}</button>);
-    
+   
     useEffect(() => {
-        setbuttontype({type: "all", data:mapData});
+
+        let subtypelist = [""]
+        pageContext.subtype.map ((type, key) => subtypelist.push(type));
+        console.log(subtypelist)
+        var newArray = mapData.filter( item => {
+            for (let key in subtypelist) {
+                if (item.type === subtypelist[key] )
+                  return true;
+              }
+              return false;
+            });
+
+        setbuttontype({type: "all", data:newArray});
     }, []);
 
 
@@ -93,7 +105,7 @@ export default function Model ({pageContext}: Props) {
             {
                 buttontype.data.map((element, index)=> (
                     <motion.div 
-                        key={index}
+                        key={`buttontype.type-${index}`}
                         className={`element-${index}`}
                         variants = {variants}
                         initial={"initial"}
